@@ -5,7 +5,7 @@ import { ChatContext } from "../context/ChatContext";
 const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-
+  console.log(message.audio);
   const ref = useRef();
 
   useEffect(() => {
@@ -29,6 +29,12 @@ const Message = ({ message }) => {
         <span>just now</span>
       </div>
       <div className="messageContent">
+        {message.audio && (
+          <audio controls id="beep">
+            <source src={message.audio} type="audio/mp3" />
+            Your browser does not support the audio tag.
+          </audio>
+        )}
         <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
       </div>
